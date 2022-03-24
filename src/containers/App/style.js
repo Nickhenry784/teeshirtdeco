@@ -1,220 +1,123 @@
 import { StyleSheet } from 'react-native';
 
 export const appStyle = StyleSheet.create({
-  turn: {
-    color: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
-    position: 'absolute',
-    top: '5%',
-    left: '5%',
-    textShadowColor: 'rgba(0, 0, 0, 0.4)',
-    textShadowOffset: { width: -1, height: 1 },
-    textShadowRadius: 10,
+  appBar: {
+    flex: 0.1,
+    width: '100%',
+    paddingLeft: 20,
+    flexDirection: 'row',
   },
-  shoppingButton: {
-    position: 'absolute',
-    top: '4%',
-    right: '4%',
-  },
-
-  shoppingImage: {
-    resizeMode: 'contain',
-    width: 40,
-    height: 40,
-  },
-  textBack: {
-    fontSize: 24,
-    color: 'white',
-    position: 'absolute',
-    top: '3%',
-    left: '3%',
-  },
-
-  textClock: {
-    position: 'relative',
-    top: 20,
-    fontSize: 120,
-    color: 'white',
-    fontWeight: '500',
-  },
-
-  clockStyle: {
-    width: 300,
-    height: 300,
-    flex: 0.52,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  textStartButton: {
-    fontSize: 30,
-    color: 'white',
-    fontWeight: 'bold',
-    position: 'absolute',
-    top: '40%',
-    left: '35%',
-  },
-
-  startImage: {
-    width: 230,
+  buyImage: {
+    width: 120,
     height: 80,
+    resizeMode: 'contain',
   },
-
-  viewCenter: {
-    flex: 1,
+  tshirtDecorView: {
+    flex: 0.6,
+    width: 200,
+    height: 300,
     alignItems: 'center',
     justifyContent: 'center',
   },
-
-  gamepadImage: {
-    alignContent: 'center',
-    justifyContent: 'center',
-    width: 300,
-    height: 300,
+  bearDecorImage: {
+    width: 100,
+    height: 100,
+    opacity: 0.7,
     resizeMode: 'contain',
   },
-
-  inputTopButton: {
-    position: 'absolute',
-    top: '1%',
-    left: '18%',
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 10,
+  back: {
     fontSize: 20,
-  },
-  inputLeftButton: {
+    fontWeight: 'bold',
+    color: 'black',
     position: 'absolute',
-    top: '45%',
-    left: '-10%',
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 10,
-    fontSize: 20,
+    top: '35%',
+    left: '50%',
   },
-
-  inputRightButton: {
+  turn: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
     position: 'absolute',
-    bottom: '-12%',
-    left: '37%',
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 10,
-    fontSize: 20,
+    top: '35%',
+    left: '50%',
   },
-  inputBottomButton: {
-    position: 'absolute',
-    bottom: '-17%',
-    left: '18%',
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 10,
-    fontSize: 20,
+  centerView: {
+    flex: 0.9,
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '100%',
   },
-  inputBlueButton: {
-    position: 'absolute',
-    top: '-17%',
-    right: '30%',
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 10,
-    fontSize: 20,
+  mockupView: {
+    flex: 0.6,
+    width: '100%',
+    paddingLeft: 10,
+    height: 200,
+    alignItems: 'center',
   },
-  inputYellowButton: {
-    position: 'absolute',
-    top: '0%',
-    right: '16%',
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 10,
-    fontSize: 20,
+  textMockup: {
+    fontSize: 30,
+    fontWeight: 'bold',
   },
-  inputRedButton: {
-    position: 'absolute',
-    top: '50%',
-    right: '-10%',
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 10,
-    fontSize: 20,
-  },
-  inputGreenButton: {
-    position: 'absolute',
-    bottom: '0%',
-    right: '23%',
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 10,
-    fontSize: 20,
-  },
-
-  startResetView: {
-    flex: 0.2,
-    width: '70%',
+  buttonView: {
+    width: '80%',
+    height: 100,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 5,
     justifyContent: 'space-between',
   },
-  imageButton: {
+  cancelImage: {
     width: 100,
-    height: 30,
+    height: 50,
     resizeMode: 'contain',
   },
-  textButton: {
-    fontSize: 20,
-    textAlign: 'center',
-    fontWeight: 'bold',
-    color: 'white',
+  tshirtView: {
+    flex: 0.6,
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
-});
+  tshirtImage: {
+    width: 250,
+    height: 300,
+    alignItems: 'center',
+    justifyContent: 'center',
+    resizeMode: 'contain',
+  },
+  OKImage: {
+    width: 150,
+    height: 70,
+    marginTop: 15,
+    resizeMode: 'contain',
+  },
+  RefeshImage: {
+    width: 100,
+    height: 50,
+    resizeMode: 'contain',
+  },
+  footerView: {
+    flex: 0.4,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
 
-export const musicsStyle = StyleSheet.create({
-  musicWrapper: {
-    position: 'absolute',
-    alignSelf: 'center',
-    bottom: '50%',
+  bearButton: {
+    width: 150,
+    height: 150,
+    backgroundColor: 'red',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  musicButton: {
-    padding: 10,
-    backgroundColor: 'gray',
-  },
-  musicButtonTitle: {
-    color: 'green',
+
+  bearImage: {
+    width: 90,
+    height: 90,
+    resizeMode: 'contain',
   },
 });
 
 export const layoutStyle = StyleSheet.create({
-  background: {
-    resizeMode: 'contain',
-    width: '100%',
-    height: '100%',
-  },
   land: {
     resizeMode: 'cover',
     position: 'absolute',
@@ -223,14 +126,14 @@ export const layoutStyle = StyleSheet.create({
     width: '100%',
     height: '40%',
   },
-  children: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
+  background: {
+    backgroundColor: 'white',
+    flex: 1,
     width: '100%',
     height: '100%',
-    zIndex: 3,
-    elevation: 3,
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
   },
 });
 

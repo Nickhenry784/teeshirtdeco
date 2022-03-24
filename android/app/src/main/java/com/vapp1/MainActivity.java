@@ -1,4 +1,4 @@
-package com.rmembersetgamepad;
+package com.teeshirtdecokuteapp;
 
 import com.facebook.react.ReactActivity;
 

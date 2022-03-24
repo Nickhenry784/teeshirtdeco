@@ -9,7 +9,7 @@ import {
 } from '../constants';
 
 export const initialState = {
-  turn: 10,
+  turn: 100,
   isShowShopping: false,
   backgroundType: 'default',
 };
