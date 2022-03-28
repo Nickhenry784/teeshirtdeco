@@ -4,116 +4,112 @@ export const appStyle = StyleSheet.create({
   appBar: {
     flex: 0.1,
     width: '100%',
-    paddingLeft: 20,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+  },
+  buyItemView: {
+    width: 80,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'space-between',
     flexDirection: 'row',
   },
   buyImage: {
-    width: 120,
-    height: 80,
-    resizeMode: 'contain',
-  },
-  tshirtDecorView: {
-    flex: 0.6,
-    width: 200,
-    height: 300,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bearDecorImage: {
-    width: 100,
-    height: 100,
-    opacity: 0.7,
+    width: 40,
+    height: 40,
     resizeMode: 'contain',
   },
   back: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'black',
-    position: 'absolute',
-    top: '35%',
-    left: '50%',
+    fontSize: 30,
+    fontFamily: 'knitting-pattern',
+    color: 'white',
   },
   turn: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    marginTop: 5,
+    fontSize: 30,
     color: 'white',
-    position: 'absolute',
-    top: '35%',
-    left: '50%',
+    fontFamily: 'knitting-pattern',
   },
-  centerView: {
+  scoreText: {
+    marginTop: 5,
+    fontSize: 30,
+    color: 'white',
+    fontFamily: 'knitting-pattern',
+  },
+  homeView: {
     flex: 0.9,
     flexDirection: 'column',
     alignItems: 'center',
     width: '100%',
   },
-  mockupView: {
-    flex: 0.6,
-    width: '100%',
-    paddingLeft: 10,
-    height: 200,
+  topView: {
+    flex: 0.5,
     alignItems: 'center',
-  },
-  textMockup: {
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-  buttonView: {
+    justifyContent: 'flex-start',
+    flexDirection: 'column',
     width: '80%',
-    height: 100,
-    flexDirection: 'row',
+  },
+  labelText: {
+    fontFamily: 'knitting-pattern',
+    fontSize: 30,
+    textAlign: 'center',
+    color: 'white',
+  },
+  startView: {
+    flex: 0.9,
     alignItems: 'center',
-    justifyContent: 'space-between',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
   },
-  cancelImage: {
-    width: 100,
-    height: 50,
-    resizeMode: 'contain',
+  playView: {
+    flex: 0.9,
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'flex-start',
   },
-  tshirtView: {
+  bottomView: {
+    width: '100%',
+    height: '100%',
     flex: 0.6,
-    width: '100%',
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  tshirtImage: {
-    width: 250,
-    height: 300,
     alignItems: 'center',
     justifyContent: 'center',
-    resizeMode: 'contain',
+    paddingLeft: 5,
   },
-  OKImage: {
-    width: 150,
-    height: 70,
-    marginTop: 15,
-    resizeMode: 'contain',
-  },
-  RefeshImage: {
+  itemButton: {
     width: 100,
-    height: 50,
+    height: 100,
+    alignItems: 'center',
+  },
+  itemImage: {
+    width: 100,
+    height: 100,
     resizeMode: 'contain',
   },
-  footerView: {
-    flex: 0.4,
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+  playImage: {
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
   },
-
-  bearButton: {
-    width: 150,
-    height: 150,
-    backgroundColor: 'red',
+  mockupImage: {
+    width: 265,
+    height: 200,
+    resizeMode: 'contain',
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'absolute',
+    top: '20%',
   },
-
-  bearImage: {
-    width: 90,
-    height: 90,
-    resizeMode: 'contain',
+  closeButton: {
+    width: 30,
+    height: 30,
+    textAlign: 'center',
+    position: 'absolute',
+    top: '3%',
+    right: '3%',
   },
 });
 
@@ -127,13 +123,16 @@ export const layoutStyle = StyleSheet.create({
     height: '40%',
   },
   background: {
-    backgroundColor: 'white',
     flex: 1,
     width: '100%',
     height: '100%',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     flexDirection: 'column',
     justifyContent: 'flex-start',
+  },
+  children: {
+    width: '100%',
+    height: '100%',
   },
 });
 
@@ -162,7 +161,7 @@ export const buttonStyle = StyleSheet.create({
     padding: 5,
   },
   buttonText: {
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.10)',
     borderRadius: 2,
     marginBottom: 5,
     paddingVertical: 10,
@@ -173,8 +172,8 @@ export const buttonStyle = StyleSheet.create({
   text: {
     color: 'white',
     textAlign: 'center',
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'knitting-pattern',
+    fontSize: 20,
   },
   textSmall: {
     color: 'white',

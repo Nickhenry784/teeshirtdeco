@@ -1,21 +1,23 @@
-Name app: Tee shirt decoration kute app
-Apkname: com.teeshirtdecokuteapp
-
-Description:
+Name app: Choose image quickly game
+Apkname: com.choosimagequicgame
 
 
-cách làm, làm giao diện như hình mau.png
-Ng dung click hình nào thì hình đó dc chọn, sau đó click vào áo thì hiện thông báo
-"Do you want add design on shirt?" nếu yes thì hình đó nằm giữa cái áo
+nhấn play game để bắt đầu , code sẽ cho random hình ở dưới lên giuã, cho ng dung 3s để chọn hình giống
+K chọn dc thì stop game, show score popup lên
+chọn dc thì cứ tiếp tục, score tăng lên 1
 
-một lần nằm lên thế mất 10point
+Font: knitting-pattern
+
+1 lần play tốn 1 turn
 
 
-mặc định có 100 point
+mặc định có 50 turn
 
-click vào nút buy ở bên phải dẻ mua thêm point
+click vào nút bên phai de mua hang`
 
-Point : 100,200,300,400
+
+
+turn : 50,100,150,200
 Price: 0.99,1.99,4.99,9.99
 
 Sub:200,500

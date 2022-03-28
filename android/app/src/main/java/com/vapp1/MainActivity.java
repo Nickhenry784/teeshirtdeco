@@ -1,4 +1,4 @@
-package com.teeshirtdecokuteapp;
+package com.choosimagequicgame;
 
 import com.facebook.react.ReactActivity;
 

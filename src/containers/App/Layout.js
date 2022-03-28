@@ -1,11 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { View, ImageBackground } from 'react-native';
 import { images } from 'assets/images';
-import { layoutStyle } from './style';
+import { appStyle, layoutStyle } from './style';
 
 function Layout({ children }) {
-  return <View style={layoutStyle.background}>{children}</View>;
+  return (
+    <ImageBackground
+      source={images.home.background}
+      style={layoutStyle.background}>
+      <View style={layoutStyle.children}>{children}</View>
+    </ImageBackground>
+  );
 }
 
 Layout.propTypes = {

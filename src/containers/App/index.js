@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Text,
   View,
   TouchableOpacity,
-  ImageBackground,
   Image,
   Alert,
+  ImageBackground,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { images } from 'assets/images';
 import { FlatGrid } from 'react-native-super-grid';
-import { bearData } from './data/bear';
+import { randomIntFromInterval } from 'utils/number';
+import { imageData } from './data/image';
 import { makeSelectIsShowShopping, makeSelectTurn } from './selectors';
 import { appStyle } from './style';
 import saga from './saga';
@@ -21,17 +22,46 @@ import reducer from './reducer';
 import Layout from './Layout';
 import Buttons from './Buttons';
 import { setShowShopping, decrementTurn } from './actions';
-import Mockup from './Mockup';
 
 const key = 'App';
 
 function App({ dispatch, turn, isShowShopping }) {
   useInjectSaga({ key, saga });
   useInjectReducer({ key, reducer });
-  const [isShowMockup, setShowMockup] = useState(false);
-  const [index, setIndex] = useState(0);
-  const [bearImageIndex, setBearImageIndex] = useState(0);
-  const [isShowBearDecorOnShirt, setShowBearDecorOnShirt] = useState(false);
+  const [imageItem, setImageItem] = useState(
+    imageData[randomIntFromInterval(0, 8)],
+  );
+  const [imageList, setImageList] = useState([...imageData]);
+  const [play, setPlay] = useState(false);
+  const [score, setScore] = useState(0);
+  const [resultClick, setResultClick] = useState(false);
+  const [time, setTime] = useState(3);
+  const result = useRef(false);
+  const [mockupShow, setMockupShow] = useState(false);
+
+  useEffect(() => {
+    const timeCoutDown = 1;
+    const timeOut = setTimeout(() => {
+      if (play && time > 0) {
+        setTime(time - 1);
+      }
+      if (play && time === 0) {
+        if (resultClick) {
+          setScore(score + 10);
+        } else {
+          setPlay(false);
+          setMockupShow(true);
+        }
+        setTime(3);
+        setResultClick(false);
+        setImageItem(imageData[randomIntFromInterval(0, 8)]);
+        setImageList(handleRandomIndexList());
+      }
+    }, 1000);
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, [time, play]);
 
   const onClickBackButton = () => {
     dispatch(setShowShopping(false));
@@ -41,28 +71,38 @@ function App({ dispatch, turn, isShowShopping }) {
     dispatch(setShowShopping(true));
   };
 
-  const onClickBearImage = value => {
+  const onClickPlayButton = value => {
     if (turn <= 0) {
       Alert.alert('Please buy more turn');
       return false;
     }
-    setIndex(value);
-    setShowMockup(true);
-  };
-
-  const handleClickOKButtonMockup = () => {
-    setShowBearDecorOnShirt(true);
-    setShowMockup(false);
-    setBearImageIndex(index);
+    setPlay(true);
     dispatch(decrementTurn());
   };
 
-  const onClickAgainButton = () => {
-    setShowBearDecorOnShirt(false);
+  const onClickImageButton = item => {
+    if (item.id === imageItem.id) {
+      setResultClick(true);
+    } else {
+      setResultClick(false);
+    }
   };
 
-  const handleClickCancelButtonMockup = () => {
-    setShowMockup(false);
+  const onClickCloseButton = () => {
+    setMockupShow(false);
+    setScore(0);
+  };
+
+  const handleRandomIndexList = () => {
+    const list = [...imageData];
+    // eslint-disable-next-line no-plusplus
+    for (let index = 0; index < list.length; index++) {
+      const randomIndex = randomIntFromInterval(0, list.length - 1);
+      const element = list[index];
+      list.splice(index, 1);
+      list.splice(randomIndex, 0, element);
+    }
+    return list;
   };
 
   return (
@@ -77,59 +117,67 @@ function App({ dispatch, turn, isShowShopping }) {
         ) : (
           <TouchableOpacity
             onPress={onClickBuyButton}
-            onLongPress={onClickBuyButton}>
-            <Image source={images.home.buy} style={appStyle.buyImage} />
+            onLongPress={onClickBuyButton}
+            style={appStyle.buyItemView}>
+            <Image source={images.home.turn} style={appStyle.buyImage} />
             <Text style={appStyle.turn}>{turn}</Text>
           </TouchableOpacity>
         )}
+        {play && <Text style={appStyle.scoreText}>{`SCORE: ${score}`}</Text>}
       </View>
       {isShowShopping ? (
         <Buttons />
       ) : (
-        <View style={appStyle.centerView}>
-          {isShowMockup ? (
-            <Mockup
-              setShowMockup={handleClickCancelButtonMockup}
-              setShowBearDecorTshrit={handleClickOKButtonMockup}
-            />
-          ) : (
-            <>
-              <View style={appStyle.tshirtDecorView}>
-                <ImageBackground
-                  source={images.home.tshirt}
-                  style={appStyle.tshirtImage}>
-                  {isShowBearDecorOnShirt && (
-                    <Image
-                      source={bearData[bearImageIndex].image}
-                      style={appStyle.bearDecorImage}
-                    />
-                  )}
-                </ImageBackground>
-              </View>
-              <TouchableOpacity
-                onPress={onClickAgainButton}
-                onLongPress={onClickAgainButton}>
-                <Image
-                  source={images.home.buttonRefesh}
-                  style={appStyle.RefeshImage}
-                />
-              </TouchableOpacity>
-            </>
-          )}
-          <View style={appStyle.footerView}>
-            <FlatGrid
-              itemDimension={80}
-              data={bearData}
-              spacing={10}
-              renderItem={({ item, index }) => (
+        <View style={appStyle.homeView}>
+          <View style={appStyle.topView}>
+            {!play ? (
+              <View style={appStyle.startView}>
                 <TouchableOpacity
-                  onPress={() => onClickBearImage(index)}
-                  onLongPress={() => onClickBearImage(index)}>
-                  <Image source={item.image} style={appStyle.bearImage} />
+                  onPress={onClickPlayButton}
+                  onLongPress={onClickPlayButton}>
+                  <Image source={images.home.play} style={appStyle.playImage} />
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <View style={appStyle.playView}>
+                <Text style={appStyle.labelText}>TIME</Text>
+                <Text style={appStyle.labelText}>{time}</Text>
+                <Image source={imageItem.image} style={appStyle.playImage} />
+              </View>
+            )}
+            <Text style={appStyle.labelText}>
+              Choose the right image with the model
+            </Text>
+          </View>
+          <View style={appStyle.bottomView}>
+            <FlatGrid
+              data={imageList}
+              itemDimension={100}
+              scrollEnabled={false}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  disabled={!play}
+                  onPress={() => onClickImageButton(item)}
+                  onLongPress={() => onClickImageButton(item)}
+                  style={appStyle.itemButton}>
+                  <Image source={item.image} style={appStyle.itemImage} />
                 </TouchableOpacity>
               )}
             />
           </View>
+          {mockupShow && (
+            <ImageBackground
+              source={images.home.mockup}
+              style={appStyle.mockupImage}>
+              <TouchableOpacity
+                onPress={onClickCloseButton}
+                onLongPress={onClickCloseButton}
+                style={appStyle.closeButton}>
+                <Text style={appStyle.scoreText}>X</Text>
+              </TouchableOpacity>
+              <Text style={appStyle.scoreText}>{`SCORE: ${score}`}</Text>
+            </ImageBackground>
+          )}
         </View>
       )}
     </Layout>
