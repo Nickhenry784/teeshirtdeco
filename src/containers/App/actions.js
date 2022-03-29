@@ -16,7 +16,7 @@ export const incrementTurn = amount => ({
   amount,
 });
 
-export const decrementTurn = (amount = 10) => ({
+export const decrementTurn = (amount = 1) => ({
   type: DECREMENT_TURN,
   amount,
 });

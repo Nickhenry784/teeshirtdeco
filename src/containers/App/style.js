@@ -5,11 +5,18 @@ export const appStyle = StyleSheet.create({
     flex: 0.1,
     width: '100%',
     paddingLeft: 20,
+    alignItems: 'center',
     flexDirection: 'row',
   },
+  buyButton: {
+    width: 100,
+    height: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   buyImage: {
-    width: 120,
-    height: 80,
+    width: 50,
+    height: 30,
     resizeMode: 'contain',
   },
   tshirtDecorView: {
@@ -29,17 +36,11 @@ export const appStyle = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: 'black',
-    position: 'absolute',
-    top: '35%',
-    left: '50%',
   },
   turn: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'white',
-    position: 'absolute',
-    top: '35%',
-    left: '50%',
+    color: 'black',
   },
   centerView: {
     flex: 0.9,
@@ -48,72 +49,53 @@ export const appStyle = StyleSheet.create({
     width: '100%',
   },
   mockupView: {
-    flex: 0.6,
+    flex: 0.5,
     width: '100%',
     paddingLeft: 10,
     height: 200,
     alignItems: 'center',
   },
-  textMockup: {
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-  buttonView: {
-    width: '80%',
-    height: 100,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  cancelImage: {
-    width: 100,
-    height: 50,
-    resizeMode: 'contain',
-  },
-  tshirtView: {
-    flex: 0.6,
-    width: '100%',
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  tshirtImage: {
-    width: 250,
+  manImage: {
+    width: 200,
     height: 300,
-    alignItems: 'center',
-    justifyContent: 'center',
     resizeMode: 'contain',
   },
-  OKImage: {
+  hairImage: {
+    width: 200,
+    height: 110,
+    resizeMode: 'contain',
+    position: 'absolute',
+    top: '-8%',
+  },
+  saveButton: {
     width: 150,
     height: 70,
-    marginTop: 15,
     resizeMode: 'contain',
   },
-  RefeshImage: {
+  saveImage: {
+    width: 150,
+    height: 70,
+    resizeMode: 'contain',
+  },
+  frameImage: {
     width: 100,
-    height: 50,
+    height: 100,
     resizeMode: 'contain',
   },
   footerView: {
-    flex: 0.4,
+    flex: 0.5,
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-
-  bearButton: {
-    width: 150,
-    height: 150,
-    backgroundColor: 'red',
     alignItems: 'center',
-    justifyContent: 'center',
   },
 
-  bearImage: {
+  hairImageList: {
     width: 90,
     height: 90,
     resizeMode: 'contain',
+    position: 'absolute',
+    top: '0%',
+    left: '5%',
   },
 });
 
@@ -127,7 +109,6 @@ export const layoutStyle = StyleSheet.create({
     height: '40%',
   },
   background: {
-    backgroundColor: 'white',
     flex: 1,
     width: '100%',
     height: '100%',
@@ -162,16 +143,16 @@ export const buttonStyle = StyleSheet.create({
     padding: 5,
   },
   buttonText: {
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.10)',
     borderRadius: 2,
     marginBottom: 5,
     paddingVertical: 10,
     paddingHorizontal: 100,
     borderWidth: 2,
-    borderColor: '#fff',
+    borderColor: 'black',
   },
   text: {
-    color: 'white',
+    color: 'black',
     textAlign: 'center',
     fontSize: 18,
     fontWeight: 'bold',

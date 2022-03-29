@@ -13,7 +13,8 @@ import { createStructuredSelector } from 'reselect';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { images } from 'assets/images';
 import { FlatGrid } from 'react-native-super-grid';
-import { bearData } from './data/bear';
+import { SizedBox } from 'sizedbox';
+import { hairData } from './data/hair';
 import { makeSelectIsShowShopping, makeSelectTurn } from './selectors';
 import { appStyle } from './style';
 import saga from './saga';
@@ -21,17 +22,15 @@ import reducer from './reducer';
 import Layout from './Layout';
 import Buttons from './Buttons';
 import { setShowShopping, decrementTurn } from './actions';
-import Mockup from './Mockup';
 
 const key = 'App';
 
 function App({ dispatch, turn, isShowShopping }) {
   useInjectSaga({ key, saga });
   useInjectReducer({ key, reducer });
-  const [isShowMockup, setShowMockup] = useState(false);
-  const [index, setIndex] = useState(0);
-  const [bearImageIndex, setBearImageIndex] = useState(0);
-  const [isShowBearDecorOnShirt, setShowBearDecorOnShirt] = useState(false);
+  const [indexHair, setIndexHair] = useState(-1);
+  const [hairState, setHairState] = useState(false);
+  const [indexFrame, setIndexFrame] = useState(0);
 
   const onClickBackButton = () => {
     dispatch(setShowShopping(false));
@@ -41,28 +40,22 @@ function App({ dispatch, turn, isShowShopping }) {
     dispatch(setShowShopping(true));
   };
 
-  const onClickBearImage = value => {
+  const onClickHairImage = value => {
     if (turn <= 0) {
       Alert.alert('Please buy more turn');
       return false;
     }
-    setIndex(value);
-    setShowMockup(true);
+    setIndexFrame(value);
   };
 
-  const handleClickOKButtonMockup = () => {
-    setShowBearDecorOnShirt(true);
-    setShowMockup(false);
-    setBearImageIndex(index);
+  const onClickSaveButton = () => {
+    if (turn <= 0) {
+      Alert.alert('Please buy more turn');
+      return false;
+    }
+    setIndexHair(indexFrame);
+    setHairState(true);
     dispatch(decrementTurn());
-  };
-
-  const onClickAgainButton = () => {
-    setShowBearDecorOnShirt(false);
-  };
-
-  const handleClickCancelButtonMockup = () => {
-    setShowMockup(false);
   };
 
   return (
@@ -77,7 +70,8 @@ function App({ dispatch, turn, isShowShopping }) {
         ) : (
           <TouchableOpacity
             onPress={onClickBuyButton}
-            onLongPress={onClickBuyButton}>
+            onLongPress={onClickBuyButton}
+            style={appStyle.buyButton}>
             <Image source={images.home.buy} style={appStyle.buyImage} />
             <Text style={appStyle.turn}>{turn}</Text>
           </TouchableOpacity>
@@ -87,49 +81,46 @@ function App({ dispatch, turn, isShowShopping }) {
         <Buttons />
       ) : (
         <View style={appStyle.centerView}>
-          {isShowMockup ? (
-            <Mockup
-              setShowMockup={handleClickCancelButtonMockup}
-              setShowBearDecorTshrit={handleClickOKButtonMockup}
-            />
-          ) : (
-            <>
-              <View style={appStyle.tshirtDecorView}>
-                <ImageBackground
-                  source={images.home.tshirt}
-                  style={appStyle.tshirtImage}>
-                  {isShowBearDecorOnShirt && (
-                    <Image
-                      source={bearData[bearImageIndex].image}
-                      style={appStyle.bearDecorImage}
-                    />
-                  )}
-                </ImageBackground>
-              </View>
-              <TouchableOpacity
-                onPress={onClickAgainButton}
-                onLongPress={onClickAgainButton}>
+          <View style={appStyle.mockupView}>
+            <ImageBackground source={images.home.man} style={appStyle.manImage}>
+              {hairState && (
                 <Image
-                  source={images.home.buttonRefesh}
-                  style={appStyle.RefeshImage}
+                  source={hairData[indexHair].image}
+                  style={appStyle.hairImage}
                 />
-              </TouchableOpacity>
-            </>
-          )}
+              )}
+            </ImageBackground>
+          </View>
+          <SizedBox vertical={10} />
           <View style={appStyle.footerView}>
             <FlatGrid
-              itemDimension={80}
-              data={bearData}
+              itemDimension={100}
+              data={hairData}
               spacing={10}
+              scrollEnabled={false}
               renderItem={({ item, index }) => (
                 <TouchableOpacity
-                  onPress={() => onClickBearImage(index)}
-                  onLongPress={() => onClickBearImage(index)}>
-                  <Image source={item.image} style={appStyle.bearImage} />
+                  onPress={() => onClickHairImage(index)}
+                  onLongPress={() => onClickHairImage(index)}>
+                  {index === indexFrame ? (
+                    <Image
+                      source={images.home.frame}
+                      style={appStyle.frameImage}
+                    />
+                  ) : (
+                    <View style={appStyle.frameImage} />
+                  )}
+                  <Image source={item.image} style={appStyle.hairImageList} />
                 </TouchableOpacity>
               )}
             />
           </View>
+          <TouchableOpacity
+            onPress={onClickSaveButton}
+            onLongPress={onClickSaveButton}
+            style={appStyle.saveButton}>
+            <Image source={images.home.save} style={appStyle.saveImage} />
+          </TouchableOpacity>
         </View>
       )}
     </Layout>

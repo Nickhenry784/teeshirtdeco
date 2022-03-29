@@ -1,11 +1,11 @@
 const subs = [
   {
-    sku: 'a1_s_300',
-    value: 300,
+    sku: 'makecustomhstyle_s_300',
+    value: 1000,
   },
   {
-    sku: 'a1_s_600',
-    value: 600,
+    sku: 'makecustomhstyle_s_600',
+    value: 3000,
   },
 ];
 

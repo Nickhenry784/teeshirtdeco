@@ -1,4 +1,4 @@
-package com.teeshirtdecokuteapp;
+package com.makecustomhstyle;
 
 import com.facebook.react.ReactActivity;
 
