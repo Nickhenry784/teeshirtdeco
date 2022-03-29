@@ -17,7 +17,7 @@ click vào nút bên phai de mua hang`
 
 
 
-turn : 50,100,150,200
+turn : 50,100,150,200c
 Price: 0.99,1.99,4.99,9.99
 
 Sub:200,500
