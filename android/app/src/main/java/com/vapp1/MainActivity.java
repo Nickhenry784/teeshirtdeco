@@ -1,4 +1,4 @@
-package com.makecustomhstyle;
+package com.findpicmemorychallgame;
 
 import com.facebook.react.ReactActivity;
 

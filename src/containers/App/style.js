@@ -4,8 +4,9 @@ export const appStyle = StyleSheet.create({
   appBar: {
     flex: 0.1,
     width: '100%',
-    paddingLeft: 20,
+    paddingHorizontal: 20,
     alignItems: 'center',
+    justifyContent: 'space-between',
     flexDirection: 'row',
   },
   buyButton: {
@@ -19,28 +20,17 @@ export const appStyle = StyleSheet.create({
     height: 30,
     resizeMode: 'contain',
   },
-  tshirtDecorView: {
-    flex: 0.6,
-    width: 200,
-    height: 300,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bearDecorImage: {
-    width: 100,
-    height: 100,
-    opacity: 0.7,
-    resizeMode: 'contain',
-  },
   back: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'red',
+    fontFamily: 'Mat Saleh',
   },
   turn: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'red',
+    fontFamily: 'Mat Saleh',
   },
   centerView: {
     flex: 0.9,
@@ -48,54 +38,66 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
   },
-  mockupView: {
-    flex: 0.5,
-    width: '100%',
-    paddingLeft: 10,
+  brainImage: {
+    width: 200,
     height: 200,
+    resizeMode: 'contain',
+  },
+  labelText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'blue',
+    fontFamily: 'Mat Saleh',
+    textAlign: 'center',
+  },
+  labelReadyText: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: 'blue',
+    fontFamily: 'Mat Saleh',
+    textAlign: 'center',
+  },
+  startImage: {
+    width: 100,
+    height: 80,
+    resizeMode: 'contain',
+  },
+  timeText: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: 'blue',
+    fontFamily: 'Mat Saleh',
+    textAlign: 'center',
+  },
+  gridView: {
+    width: '90%',
+    height: 450,
+    paddingLeft: 10,
     alignItems: 'center',
   },
-  manImage: {
-    width: 200,
+  iconButton: {
+    width: 60,
+    height: 60,
+    alignItems: 'center',
+  },
+  gameOverImage: {
+    width: 300,
+    height: 200,
+    resizeMode: 'contain',
+    position: 'absolute',
+    top: '30%',
+  },
+  winImage: {
+    width: 400,
     height: 300,
     resizeMode: 'contain',
-  },
-  hairImage: {
-    width: 200,
-    height: 110,
-    resizeMode: 'contain',
     position: 'absolute',
-    top: '-8%',
+    top: '30%',
   },
-  saveButton: {
-    width: 150,
-    height: 70,
+  iconImage: {
+    width: 60,
+    height: 60,
     resizeMode: 'contain',
-  },
-  saveImage: {
-    width: 150,
-    height: 70,
-    resizeMode: 'contain',
-  },
-  frameImage: {
-    width: 100,
-    height: 100,
-    resizeMode: 'contain',
-  },
-  footerView: {
-    flex: 0.5,
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-
-  hairImageList: {
-    width: 90,
-    height: 90,
-    resizeMode: 'contain',
-    position: 'absolute',
-    top: '0%',
-    left: '5%',
   },
 });
 
@@ -143,7 +145,7 @@ export const buttonStyle = StyleSheet.create({
     padding: 5,
   },
   buttonText: {
-    backgroundColor: 'rgba(0,0,0,0.10)',
+    backgroundColor: 'blue',
     borderRadius: 2,
     marginBottom: 5,
     paddingVertical: 10,
@@ -152,7 +154,7 @@ export const buttonStyle = StyleSheet.create({
     borderColor: 'black',
   },
   text: {
-    color: 'black',
+    color: 'white',
     textAlign: 'center',
     fontSize: 18,
     fontWeight: 'bold',
