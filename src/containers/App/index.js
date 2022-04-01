@@ -1,129 +1,127 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, TouchableOpacity, Image, Alert } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ImageBackground,
+  Alert,
+  Image,
+} from 'react-native';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { images } from 'assets/images';
 import { SizedBox } from 'sizedbox';
-import { randomIntFromInterval } from 'utils/number';
-import { isSet } from 'immer/dist/internal';
-import { iconData } from './data/icon';
-import { makeSelectIsShowShopping, makeSelectTurn } from './selectors';
+import {
+  makeSelectIsShowShopping,
+  makeSelectScore,
+  makeSelectTurn,
+} from './selectors';
 import { appStyle } from './style';
 import saga from './saga';
 import reducer from './reducer';
 import Layout from './Layout';
 import Buttons from './Buttons';
-import { setShowShopping, decrementTurn } from './actions';
+import { setShowShopping, decrementTurn, setScore } from './actions';
 import PlayPage from './PlayPage';
 
 const key = 'App';
 
-function App({ dispatch, turn, isShowShopping }) {
+function App({ dispatch, turn, isShowShopping, score }) {
   useInjectSaga({ key, saga });
   useInjectReducer({ key, reducer });
   const [play, setPlay] = useState(false);
-  const [iconList, setIconList] = useState(iconData);
-  const length = useRef(iconData.length);
   const [showPopup, setShowPopup] = useState(false);
-  const [win, setWin] = useState(false);
 
   const onClickBuyButton = () => {
     dispatch(setShowShopping(!isShowShopping));
   };
 
-  const handleGameOver = value => {
-    setPlay(false);
-    if (value) {
-      setWin(true);
-    }
-    setShowPopup(true);
-  };
-
-  const onClickBanner = () => {
-    setShowPopup(false);
-  };
-
-  const onClickStartButton = () => {
+  const onClickPlayButton = () => {
     if (turn <= 0) {
       Alert.alert('Please buy more turn');
       return false;
     }
     dispatch(decrementTurn());
-    handleRandomListIcon();
     setPlay(true);
   };
 
-  const handleRandomListIcon = () => {
-    const list = [...iconData];
-    // eslint-disable-next-line no-plusplus
-    for (let index = 0; index < 5; index++) {
-      list.splice(randomIntFromInterval(0, length.current - 1), 1);
-      length.current -= 1;
-    }
-    const list1 = [...list];
-    const list2 = list.concat(list1);
-    // eslint-disable-next-line no-plusplus
-    for (let index = 0; index < list2.length; index++) {
-      const element = list2[index];
-      list2.splice(index, 1);
-      list2.splice(randomIntFromInterval(0, 22), 0, element);
-    }
-    setIconList(list2);
+  const handleGameOver = () => {
+    setPlay(false);
+    setShowPopup(true);
+  };
+
+  const onClickBanner = () => {
+    setShowPopup(false);
+    dispatch(setScore());
   };
 
   return (
     <Layout turn={turn}>
       {play ? (
-        <PlayPage listIcon={iconList} handleFalseResultClick={handleGameOver} />
+        <PlayPage handleFalseResultClick={handleGameOver} />
       ) : (
         <>
-          <View style={appStyle.appBar}>
-            {isShowShopping ? (
+          {isShowShopping ? (
+            <TouchableOpacity
+              onPress={onClickBuyButton}
+              onLongPress={onClickBuyButton}>
+              <Text style={appStyle.back}>Back</Text>
+            </TouchableOpacity>
+          ) : (
+            <View style={appStyle.appBar}>
+              <ImageBackground
+                source={images.home.score}
+                style={appStyle.buyImage}>
+                <Text style={appStyle.turn}>{score}</Text>
+              </ImageBackground>
               <TouchableOpacity
                 onPress={onClickBuyButton}
                 onLongPress={onClickBuyButton}>
-                <Text style={appStyle.back}>Back</Text>
+                <ImageBackground
+                  source={images.home.turn}
+                  style={appStyle.buyImage}>
+                  <Text style={appStyle.turn}>{turn}</Text>
+                </ImageBackground>
               </TouchableOpacity>
-            ) : (
-              <TouchableOpacity
-                onPress={onClickBuyButton}
-                onLongPress={onClickBuyButton}
-                style={appStyle.buyButton}>
-                <Image source={images.home.heart} style={appStyle.buyImage} />
-                <Text style={appStyle.turn}>{turn}</Text>
-              </TouchableOpacity>
-            )}
-          </View>
+            </View>
+          )}
+
           {isShowShopping ? (
             <Buttons />
           ) : (
             <View style={appStyle.centerView}>
-              <Image source={images.home.brain} style={appStyle.brainImage} />
-              <SizedBox vertical={10} />
-              <Text style={appStyle.labelText}>
-                You have to choose the same pairs of pictures to win
-              </Text>
-              <SizedBox vertical={20} />
-              <Text style={appStyle.labelReadyText}>Are you ready?</Text>
-              <SizedBox vertical={20} />
+              <Image source={images.home.top} style={appStyle.topImage} />
+              <SizedBox vertical={5} />
               <TouchableOpacity
-                onPress={onClickStartButton}
-                onLongPress={onClickStartButton}>
-                <Image source={images.home.start} style={appStyle.startImage} />
+                onPress={onClickPlayButton}
+                disabled={showPopup}
+                onLongPress={onClickPlayButton}>
+                <Image source={images.home.play1} style={appStyle.playImage} />
               </TouchableOpacity>
+              <SizedBox vertical={10} />
+              <ImageBackground
+                source={images.home.panel}
+                style={appStyle.panelImage}
+              />
+              <SizedBox vertical={10} />
+              <View style={appStyle.bottomView}>
+                <Image source={images.home.true} style={appStyle.trueImage} />
+                <Image source={images.home.false} style={appStyle.trueImage} />
+              </View>
             </View>
           )}
           {showPopup && (
             <TouchableOpacity
               onPress={onClickBanner}
               onLongPress={onClickBanner}
-              style={!win ? appStyle.gameOverImage : appStyle.winImage}>
-              <Image
-                source={!win ? images.home.gameover : images.home.win}
-                style={!win ? appStyle.gameOverImage : appStyle.winImage}
-              />
+              style={appStyle.popup}>
+              <ImageBackground
+                source={images.home.popup}
+                style={appStyle.popupImage}>
+                <Text style={appStyle.scoreText}>{score}</Text>
+              </ImageBackground>
             </TouchableOpacity>
           )}
         </>
@@ -136,10 +134,12 @@ App.propTypes = {
   dispatch: PropTypes.func,
   turn: PropTypes.number,
   isShowShopping: PropTypes.bool,
+  score: PropTypes.number,
 };
 
 const mapStateToProps = createStructuredSelector({
   turn: makeSelectTurn(),
+  score: makeSelectScore(),
   isShowShopping: makeSelectIsShowShopping(),
 });
 

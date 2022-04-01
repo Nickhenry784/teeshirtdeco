@@ -9,28 +9,27 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
   },
-  buyButton: {
-    width: 100,
-    height: 50,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
+
   buyImage: {
-    width: 50,
+    width: 90,
     height: 30,
     resizeMode: 'contain',
   },
   back: {
     fontSize: 20,
-    fontWeight: 'bold',
-    color: 'red',
-    fontFamily: 'Mat Saleh',
+    color: 'white',
+    fontFamily: 'ViaAppia',
+    position: 'absolute',
+    marginTop: 10,
+    left: '-45%',
   },
   turn: {
     fontSize: 20,
-    fontWeight: 'bold',
-    color: 'red',
-    fontFamily: 'Mat Saleh',
+    color: 'white',
+    fontFamily: 'ViaAppia',
+    position: 'absolute',
+    paddingTop: 6,
+    left: '60%',
   },
   centerView: {
     flex: 0.9,
@@ -38,66 +37,84 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
   },
-  brainImage: {
-    width: 200,
-    height: 200,
+  topImage: {
+    width: 130,
+    height: 130,
     resizeMode: 'contain',
   },
-  labelText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'blue',
-    fontFamily: 'Mat Saleh',
-    textAlign: 'center',
+
+  playImage: {
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
   },
-  labelReadyText: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    color: 'blue',
-    fontFamily: 'Mat Saleh',
-    textAlign: 'center',
+  panelImage: {
+    width: 300,
+    height: 250,
+    resizeMode: 'contain',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 40,
   },
   startImage: {
     width: 100,
     height: 80,
     resizeMode: 'contain',
   },
+  bottomView: {
+    flex: 0.8,
+    width: '80%',
+    paddingHorizontal: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  trueImage: {
+    width: 120,
+    height: 80,
+    resizeMode: 'contain',
+  },
+  playView: {
+    flex: 1,
+    paddingTop: 10,
+    justifyContent: 'flex-start',
+    width: '100%',
+  },
   timeText: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: 'blue',
-    fontFamily: 'Mat Saleh',
-    textAlign: 'center',
+    fontSize: 40,
+    color: 'white',
+    fontFamily: 'ViaAppia',
   },
-  gridView: {
-    width: '90%',
-    height: 450,
-    paddingLeft: 10,
+  calculationView: {
+    flex: 0.4,
+    width: '80%',
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
   },
-  iconButton: {
-    width: 60,
-    height: 60,
-    alignItems: 'center',
+  calculationText: {
+    fontSize: 40,
+    paddingRight: 10,
+    color: 'white',
+    fontFamily: 'ViaAppia',
   },
-  gameOverImage: {
+  popup: {
     width: 300,
     height: 200,
-    resizeMode: 'contain',
     position: 'absolute',
-    top: '30%',
+    top: '40%',
   },
-  winImage: {
-    width: 400,
-    height: 300,
+  popupImage: {
+    width: 310,
+    height: 150,
     resizeMode: 'contain',
-    position: 'absolute',
-    top: '30%',
+    alignItems: 'center',
+    paddingTop: 70,
   },
-  iconImage: {
-    width: 60,
-    height: 60,
-    resizeMode: 'contain',
+  scoreText: {
+    fontSize: 40,
+    color: 'white',
+    fontFamily: 'ViaAppia',
   },
 });
 
@@ -116,6 +133,7 @@ export const layoutStyle = StyleSheet.create({
     height: '100%',
     alignItems: 'center',
     flexDirection: 'column',
+    backgroundColor: '#2d1416',
     justifyContent: 'flex-start',
   },
 });
@@ -145,7 +163,7 @@ export const buttonStyle = StyleSheet.create({
     padding: 5,
   },
   buttonText: {
-    backgroundColor: 'blue',
+    backgroundColor: 'white',
     borderRadius: 2,
     marginBottom: 5,
     paddingVertical: 10,
@@ -157,7 +175,7 @@ export const buttonStyle = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'ViaAppia',
   },
   textSmall: {
     color: 'white',

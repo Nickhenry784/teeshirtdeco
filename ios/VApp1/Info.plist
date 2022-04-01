@@ -54,6 +54,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Mat Saleh.ttf</string>
+		<string>ViaAppia.ttf</string>
 	</array>
 </dict>
 </plist>

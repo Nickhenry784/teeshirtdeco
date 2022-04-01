@@ -4,6 +4,8 @@ import {
   INCREMENT_TURN,
   DECREMENT_TURN,
   SET_SHOW_SHOPPING,
+  INCREMENT_SCORE,
+  SET_SCORE,
 } from './constants';
 
 export const setTurn = turn => ({
@@ -11,8 +13,18 @@ export const setTurn = turn => ({
   turn,
 });
 
+export const setScore = (amount = 0) => ({
+  type: SET_SCORE,
+  amount,
+});
+
 export const incrementTurn = amount => ({
   type: INCREMENT_TURN,
+  amount,
+});
+
+export const incrementScore = (amount = 1) => ({
+  type: INCREMENT_SCORE,
   amount,
 });
 

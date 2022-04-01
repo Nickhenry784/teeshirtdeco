@@ -1,143 +1,215 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, TouchableOpacity, Image, Alert } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  ImageBackground,
+} from 'react-native';
 import { connect } from 'react-redux';
 import { images } from 'assets/images';
-import { FlatGrid } from 'react-native-super-grid';
 import { SizedBox } from 'sizedbox';
+import { calculationInt, randomIntFromInterval } from 'utils/number';
+import { createStructuredSelector } from 'reselect';
 import { appStyle } from './style';
-import Layout from './Layout';
+import { incrementScore } from './actions';
+import { makeSelectScore } from './selectors';
 
-function App({ dispatch, listIcon, handleFalseResultClick }) {
-  const [startGameState, setStartGameState] = useState([]);
-  const [score, setScore] = useState(0);
-  const [heart, setHeart] = useState(3);
-  const [minutesCoutdown, setMinutesCoutdown] = useState(2);
-  const [secondsCoutdown, setSecondsCoutdown] = useState(60);
-  const [doubleClick, setDoubleClick] = useState(false);
-  const [result, setResult] = useState(null);
-  const indexOld = useRef(-1);
+function PlayPage({ score, handleFalseResultClick, dispatch }) {
+  const [secondsCoutdown, setSecondsCoutdown] = useState(5);
+  const [randomResult, setRandomResult] = useState(randomIntFromInterval(0, 3));
+  const calculation = ['+', '-', 'x', '/'];
+  const index = useRef(10);
+
+  const calculationNumber = useRef([
+    randomIntFromInterval(0, index.current),
+    randomIntFromInterval(1, index.current),
+    calculation[randomIntFromInterval(0, 3)],
+  ]);
+
+  const calculationResult = useRef(
+    calculationInt(
+      calculationNumber.current[0],
+      calculationNumber.current[1],
+      calculationNumber.current[2],
+    ),
+  );
 
   useEffect(() => {
     const timeOut = setTimeout(() => {
       if (secondsCoutdown > 0) {
         setSecondsCoutdown(secondsCoutdown - 1);
       }
-      if (secondsCoutdown === 0 && minutesCoutdown > 0) {
-        setMinutesCoutdown(minutesCoutdown - 1);
-        setSecondsCoutdown(60);
-      }
-      if (secondsCoutdown === 0 && minutesCoutdown === 0) {
-        onClickOKButton();
+      if (secondsCoutdown === 0) {
+        handleFalseResultClick();
       }
     }, 1000);
     return () => {
       clearTimeout(timeOut);
     };
-  }, [secondsCoutdown, minutesCoutdown]);
+  }, [secondsCoutdown]);
 
-  const onClickIconImage = (value, index) => {
-    const list = [...startGameState];
-    list[index] = true;
-    if (!doubleClick) {
-      indexOld.current = index;
-      setResult(value);
-      setDoubleClick(true);
-      setStartGameState(list);
-      return false;
+  const onClickTrueButton = isTrue => {
+    switch (calculationNumber.current[2]) {
+      case '+': {
+        if (isTrue === true) {
+          if (
+            calculationNumber.current[0] + calculationNumber.current[1] ===
+            calculationResult.current
+          ) {
+            dispatch(incrementScore());
+          } else {
+            handleFalseResultClick();
+          }
+        } else if (
+          calculationNumber.current[0] + calculationNumber.current[1] !==
+          calculationResult.current
+        ) {
+          dispatch(incrementScore());
+        } else {
+          handleFalseResultClick();
+        }
+        break;
+      }
+      case '-': {
+        if (isTrue === true) {
+          if (
+            calculationNumber.current[0] - calculationNumber.current[1] ===
+            calculationResult.current
+          ) {
+            dispatch(incrementScore());
+          } else {
+            handleFalseResultClick();
+          }
+        } else if (
+          calculationNumber.current[0] - calculationNumber.current[1] !==
+          calculationResult.current
+        ) {
+          dispatch(incrementScore());
+        } else {
+          handleFalseResultClick();
+        }
+        break;
+      }
+      case 'x': {
+        if (isTrue === true) {
+          if (
+            calculationNumber.current[0] * calculationNumber.current[1] ===
+            calculationResult.current
+          ) {
+            dispatch(incrementScore());
+          } else {
+            handleFalseResultClick();
+          }
+        } else if (
+          calculationNumber.current[0] * calculationNumber.current[1] !==
+          calculationResult.current
+        ) {
+          dispatch(incrementScore());
+        } else {
+          handleFalseResultClick();
+        }
+        break;
+      }
+      case '/': {
+        if (isTrue === true) {
+          if (
+            calculationNumber.current[0] / calculationNumber.current[1] ===
+            calculationResult.current
+          ) {
+            dispatch(incrementScore());
+          } else {
+            handleFalseResultClick();
+          }
+        } else if (
+          calculationNumber.current[0] / calculationNumber.current[1] !==
+          calculationResult.current
+        ) {
+          dispatch(incrementScore());
+        } else {
+          handleFalseResultClick();
+        }
+        break;
+      }
+      default: {
+        return false;
+      }
     }
-    if (result.id === value.id) {
-      setScore(score + 1);
-    } else {
-      setHeart(heart - 1);
-      list[indexOld.current] = false;
-      list[index] = false;
+    if (score > 10) {
+      index.current += 10;
     }
-    if (heart === 0) {
-      handleFalseResultClick();
-    }
-    if (score === 12) {
-      handleFalseResultClick(true);
-    }
-    setDoubleClick(false);
-    setResult(null);
-    setStartGameState(list);
+    setRandomResult(randomIntFromInterval(0, 3));
+    calculationNumber.current = [
+      randomIntFromInterval(0, index.current),
+      randomIntFromInterval(1, index.current),
+      calculation[randomIntFromInterval(0, 3)],
+    ];
+    calculationResult.current = calculationInt(
+      calculationNumber.current[0],
+      randomResult === 0
+        ? calculationNumber.current[1]
+        : randomIntFromInterval(0, 30),
+      calculationNumber.current[2],
+    );
+    setSecondsCoutdown(5);
   };
 
-  const onClickOKButton = () => {
-    setMinutesCoutdown(0);
-    setSecondsCoutdown(0);
-    const list = [...startGameState];
-    // eslint-disable-next-line no-plusplus
-    for (let index = 0; index < listIcon.length; index++) {
-      list.push(false);
-    }
-    setStartGameState(list);
-  };
   return (
-    <Layout>
-      <View style={appStyle.appBar}>
-        <Text style={appStyle.turn}>
-          SCORE:
-          {score}
-        </Text>
-        {startGameState.length !== 0 && (
-          <Text style={appStyle.turn}>
-            HEART:
-            {heart}
-          </Text>
-        )}
-      </View>
+    <View style={appStyle.playView}>
+      <ImageBackground source={images.home.score} style={appStyle.buyImage}>
+        <Text style={appStyle.turn}>{score}</Text>
+      </ImageBackground>
       <View style={appStyle.centerView}>
-        {startGameState.length === 0 && (
-          <Text style={appStyle.timeText}>
-            {`${minutesCoutdown} : ${secondsCoutdown}`}
-          </Text>
-        )}
+        <Image source={images.home.top} style={appStyle.topImage} />
+        <SizedBox vertical={5} />
+        <Text style={appStyle.timeText}>{secondsCoutdown}</Text>
         <SizedBox vertical={10} />
-        <View style={appStyle.gridView}>
-          <FlatGrid
-            itemDimension={60}
-            data={listIcon}
-            renderItem={({ item, index }) => (
-              <TouchableOpacity
-                onPress={() => onClickIconImage(item, index)}
-                onLongPress={() => onClickIconImage(item, index)}
-                disabled={
-                  startGameState.length === 0 ? true : startGameState[index]
-                }
-                style={appStyle.iconButton}>
-                {startGameState.length === 0 ? (
-                  <Image source={item.image} style={appStyle.iconImage} />
-                ) : (
-                  <Image
-                    source={
-                      startGameState[index] ? item.image : images.home.question
-                    }
-                    style={appStyle.iconImage}
-                  />
-                )}
-              </TouchableOpacity>
-            )}
-          />
-        </View>
-        <SizedBox vertical={10} />
-        {startGameState.length === 0 && (
+        <ImageBackground source={images.home.panel} style={appStyle.panelImage}>
+          <View style={appStyle.calculationView}>
+            <Text style={appStyle.calculationText}>
+              {calculationNumber.current[0]}
+            </Text>
+            <Text style={appStyle.calculationText}>
+              {calculationNumber.current[2]}
+            </Text>
+            <Text style={appStyle.calculationText}>
+              {calculationNumber.current[1]}
+            </Text>
+            <Text style={appStyle.calculationText}> = </Text>
+            <Text style={appStyle.calculationText}>
+              {calculationResult.current === 0
+                ? 0
+                : calculationResult.current.toFixed(2)}
+            </Text>
+          </View>
+        </ImageBackground>
+        <SizedBox vertical={30} />
+        <View style={appStyle.bottomView}>
           <TouchableOpacity
-            onPress={onClickOKButton}
-            onLongPress={onClickOKButton}>
-            <Image source={images.home.ok} style={appStyle.startImage} />
+            onPress={() => onClickTrueButton(true)}
+            onLongPress={() => onClickTrueButton(true)}>
+            <Image source={images.home.true} style={appStyle.trueImage} />
           </TouchableOpacity>
-        )}
+          <TouchableOpacity
+            onPress={() => onClickTrueButton(false)}
+            onLongPress={() => onClickTrueButton(false)}>
+            <Image source={images.home.false} style={appStyle.trueImage} />
+          </TouchableOpacity>
+        </View>
       </View>
-    </Layout>
+    </View>
   );
 }
 
-App.propTypes = {
+PlayPage.propTypes = {
+  score: PropTypes.number,
   dispatch: PropTypes.func,
-  listIcon: PropTypes.array,
   handleFalseResultClick: PropTypes.func,
 };
 
-export default connect()(App);
+const mapStateToProps = createStructuredSelector({
+  score: makeSelectScore(),
+});
+
+export default connect(mapStateToProps)(PlayPage);

@@ -1,15 +1,14 @@
-Name app: Find pairs of pic - memory challenge
-Apkname: com.findpicmemorychallgame
+Name app: True False Game Egypt Style
+
+Apkname: com.truefalsegegyptsty
 
 
-Random các hình theo cặp để ng dùng ghi nhớ và chơi
-
-
-1 lần chơi tốn 1 heart
+1 lần click play toons 1 turn
 
 
 
-heart : 50,100,200,300
+
+turn : 50,100,200,300
 Price: 0.99,1.99,4.99,9.99
 
 Sub:500,1000

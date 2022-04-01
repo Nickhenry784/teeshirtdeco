@@ -1,4 +1,4 @@
-package com.findpicmemorychallgame;
+package com.truefalsegegyptsty;
 
 import com.facebook.react.ReactActivity;
 
