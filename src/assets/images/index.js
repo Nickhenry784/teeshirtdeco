@@ -3,7 +3,7 @@ export const images = {
   home: {
     logo: require('./home/logo.png'),
     background: require('./home/background.jpg'),
-    buy: require('./home/buy.png'),
+    buy: require('./home/Buy.png'),
     man: require('./home/man.png'),
     save: require('./home/save.png'),
     s1: require('./home/hair/s1.png'),

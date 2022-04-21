@@ -14,6 +14,7 @@ import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { images } from 'assets/images';
 import { FlatGrid } from 'react-native-super-grid';
 import { SizedBox } from 'sizedbox';
+import { FlatList } from 'react-native-gesture-handler';
 import { hairData } from './data/hair';
 import { makeSelectIsShowShopping, makeSelectTurn } from './selectors';
 import { appStyle } from './style';
@@ -31,6 +32,7 @@ function App({ dispatch, turn, isShowShopping }) {
   const [indexHair, setIndexHair] = useState(-1);
   const [hairState, setHairState] = useState(false);
   const [indexFrame, setIndexFrame] = useState(0);
+  const num = 3;
 
   const onClickBackButton = () => {
     dispatch(setShowShopping(false));
@@ -93,11 +95,10 @@ function App({ dispatch, turn, isShowShopping }) {
           </View>
           <SizedBox vertical={10} />
           <View style={appStyle.footerView}>
-            <FlatGrid
-              itemDimension={100}
+            <FlatList
               data={hairData}
-              spacing={10}
               scrollEnabled={false}
+              numColumns={num}
               renderItem={({ item, index }) => (
                 <TouchableOpacity
                   onPress={() => onClickHairImage(index)}

@@ -1,4 +1,4 @@
-package com.makecustomhstyle;
+package com.erneststolt.makecustomhstyle;
 
 import com.facebook.react.ReactActivity;
 
