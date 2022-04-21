@@ -1,5 +1,5 @@
 Name app: Find pairs of pic - memory challenge
-Apkname: com.findpicmemorychallgame
+Apkname: com.kirkmckenzie.findpicmemorychallgame
 
 
 Random các hình theo cặp để ng dùng ghi nhớ và chơi

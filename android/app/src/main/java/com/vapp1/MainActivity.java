@@ -1,4 +1,4 @@
-package com.findpicmemorychallgame;
+package com.kirkmckenzie.findpicmemorychallgame;
 
 import com.facebook.react.ReactActivity;
 

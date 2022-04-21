@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { images } from 'assets/images';
 import { FlatGrid } from 'react-native-super-grid';
 import { SizedBox } from 'sizedbox';
+import { FlatList } from 'react-native-gesture-handler';
 import { appStyle } from './style';
 import Layout from './Layout';
 
@@ -16,6 +17,7 @@ function App({ dispatch, listIcon, handleFalseResultClick }) {
   const [secondsCoutdown, setSecondsCoutdown] = useState(60);
   const [doubleClick, setDoubleClick] = useState(false);
   const [result, setResult] = useState(null);
+  const num = 4;
   const indexOld = useRef(-1);
 
   useEffect(() => {
@@ -39,6 +41,7 @@ function App({ dispatch, listIcon, handleFalseResultClick }) {
   const onClickIconImage = (value, index) => {
     const list = [...startGameState];
     list[index] = true;
+
     if (!doubleClick) {
       indexOld.current = index;
       setResult(value);
@@ -95,33 +98,31 @@ function App({ dispatch, listIcon, handleFalseResultClick }) {
           </Text>
         )}
         <SizedBox vertical={10} />
-        <View style={appStyle.gridView}>
-          <FlatGrid
-            itemDimension={60}
-            data={listIcon}
-            renderItem={({ item, index }) => (
-              <TouchableOpacity
-                onPress={() => onClickIconImage(item, index)}
-                onLongPress={() => onClickIconImage(item, index)}
-                disabled={
-                  startGameState.length === 0 ? true : startGameState[index]
-                }
-                style={appStyle.iconButton}>
-                {startGameState.length === 0 ? (
-                  <Image source={item.image} style={appStyle.iconImage} />
-                ) : (
-                  <Image
-                    source={
-                      startGameState[index] ? item.image : images.home.question
-                    }
-                    style={appStyle.iconImage}
-                  />
-                )}
-              </TouchableOpacity>
-            )}
-          />
-        </View>
-        <SizedBox vertical={10} />
+        <FlatList
+          data={listIcon}
+          numColumns={num}
+          scrollEnabled={false}
+          renderItem={({ item, index }) => (
+            <TouchableOpacity
+              onPress={() => onClickIconImage(item, index)}
+              onLongPress={() => onClickIconImage(item, index)}
+              disabled={
+                startGameState.length === 0 ? true : startGameState[index]
+              }
+              style={appStyle.iconButton}>
+              {startGameState.length === 0 ? (
+                <Image source={item.image} style={appStyle.iconImage} />
+              ) : (
+                <Image
+                  source={
+                    startGameState[index] ? item.image : images.home.question
+                  }
+                  style={appStyle.iconImage}
+                />
+              )}
+            </TouchableOpacity>
+          )}
+        />
         {startGameState.length === 0 && (
           <TouchableOpacity
             onPress={onClickOKButton}

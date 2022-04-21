@@ -1,4 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export const appStyle = StyleSheet.create({
   appBar: {
@@ -39,27 +42,27 @@ export const appStyle = StyleSheet.create({
     width: '100%',
   },
   brainImage: {
-    width: 200,
-    height: 200,
+    width: windowWidth * 0.3,
+    height: windowWidth * 0.3,
     resizeMode: 'contain',
   },
   labelText: {
-    fontSize: 20,
+    fontSize: windowWidth * 0.05,
     fontWeight: 'bold',
     color: 'blue',
     fontFamily: 'Mat Saleh',
     textAlign: 'center',
   },
   labelReadyText: {
-    fontSize: 25,
+    fontSize: windowWidth * 0.07,
     fontWeight: 'bold',
     color: 'blue',
     fontFamily: 'Mat Saleh',
     textAlign: 'center',
   },
   startImage: {
-    width: 100,
-    height: 80,
+    width: windowWidth * 0.2,
+    height: windowHeight * 0.1,
     resizeMode: 'contain',
   },
   timeText: {
@@ -70,33 +73,33 @@ export const appStyle = StyleSheet.create({
     textAlign: 'center',
   },
   gridView: {
-    width: '90%',
-    height: 450,
-    paddingLeft: 10,
+    backgroundColor: 'red',
+    height: windowHeight * 0.6,
+    padding: 10,
     alignItems: 'center',
   },
   iconButton: {
-    width: 60,
-    height: 60,
+    width: windowWidth * 0.12,
+    height: windowWidth * 0.12,
     alignItems: 'center',
   },
   gameOverImage: {
-    width: 300,
-    height: 200,
+    width: windowWidth * 0.6,
+    height: windowHeight * 0.3,
     resizeMode: 'contain',
     position: 'absolute',
     top: '30%',
   },
   winImage: {
-    width: 400,
-    height: 300,
+    width: windowWidth * 0.6,
+    height: windowHeight * 0.3,
     resizeMode: 'contain',
     position: 'absolute',
     top: '30%',
   },
   iconImage: {
-    width: 60,
-    height: 60,
+    width: windowWidth * 0.1,
+    height: windowWidth * 0.1,
     resizeMode: 'contain',
   },
 });
