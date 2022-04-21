@@ -1,5 +1,5 @@
 Name app: Choose image quickly game
-Apkname: com.choosimagequicgame
+Apkname: com.tillmanspen.choosimagequicgame
 
 
 nhấn play game để bắt đầu , code sẽ cho random hình ở dưới lên giuã, cho ng dung 3s để chọn hình giống

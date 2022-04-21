@@ -14,6 +14,7 @@ import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { images } from 'assets/images';
 import { FlatGrid } from 'react-native-super-grid';
 import { randomIntFromInterval } from 'utils/number';
+import { FlatList } from 'react-native-gesture-handler';
 import { imageData } from './data/image';
 import { makeSelectIsShowShopping, makeSelectTurn } from './selectors';
 import { appStyle } from './style';
@@ -38,6 +39,7 @@ function App({ dispatch, turn, isShowShopping }) {
   const [time, setTime] = useState(3);
   const result = useRef(false);
   const [mockupShow, setMockupShow] = useState(false);
+  const numColumn = 3;
 
   useEffect(() => {
     const timeCoutDown = 1;
@@ -81,6 +83,7 @@ function App({ dispatch, turn, isShowShopping }) {
   };
 
   const onClickImageButton = item => {
+    setTime(0);
     if (item.id === imageItem.id) {
       setResultClick(true);
     } else {
@@ -150,10 +153,10 @@ function App({ dispatch, turn, isShowShopping }) {
             </Text>
           </View>
           <View style={appStyle.bottomView}>
-            <FlatGrid
+            <FlatList
               data={imageList}
-              itemDimension={100}
               scrollEnabled={false}
+              numColumns={numColumn}
               renderItem={({ item }) => (
                 <TouchableOpacity
                   disabled={!play}

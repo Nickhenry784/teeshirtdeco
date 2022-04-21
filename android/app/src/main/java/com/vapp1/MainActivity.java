@@ -1,4 +1,4 @@
-package com.choosimagequicgame;
+package com.tillmanspen.choosimagequicgame;
 
 import com.facebook.react.ReactActivity;
 

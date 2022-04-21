@@ -1,4 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export const appStyle = StyleSheet.create({
   appBar: {
@@ -80,13 +83,13 @@ export const appStyle = StyleSheet.create({
     paddingLeft: 5,
   },
   itemButton: {
-    width: 100,
-    height: 100,
+    width: windowWidth * 0.2,
+    height: windowWidth * 0.2,
     alignItems: 'center',
   },
   itemImage: {
-    width: 100,
-    height: 100,
+    width: windowWidth * 0.2,
+    height: windowWidth * 0.2,
     resizeMode: 'contain',
   },
   playImage: {
@@ -95,8 +98,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   mockupImage: {
-    width: 265,
-    height: 200,
+    width: windowWidth * 0.6,
+    height: windowHeight * 0.3,
     resizeMode: 'contain',
     alignItems: 'center',
     justifyContent: 'center',
